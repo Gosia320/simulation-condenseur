@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulation Condenseur</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: "Courier New", Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      border: 2px solid #00ff00;
+      padding: 2rem;
+      max-width: 500px;
+    }
+    input {
+      background-color: #111;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    button {
+      background-color: #00ff00;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .message {
+      margin-top: 1.5rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p><strong>SYSTÈME DE CONTRÔLE DU CONDENSEUR</strong></p>
+    <p>Problème détecté dans le transfert thermique du condenseur.<br>
+    Entrez la valeur calculée du flux thermique (en watts) pour débloquer le système.</p>
+    
+    <input type="number" id="inputQ" placeholder="Entrez la valeur de q en W">
+    <button onclick="verifierValeur()">Valider</button>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    function verifierValeur() {
+      const valeurCorrecte = 42769;
+      const tolerance = 10; // accepte de 42759 à 42779
+      const input = parseFloat(document.getElementById("inputQ").value);
+      const message = document.getElementById("message");
+
+      if (Math.abs(input - valeurCorrecte) <= tolerance) {
+        message.style.color = '#00ff00';
+        message.textContent = "✅ Code validé : le condenseur reprend son fonctionnement normal.";
+      } else {
+        message.style.color = '#ff3333';
+        message.textContent = "❌ Erreur : valeur de flux thermique incohérente. Vérifiez vos calculs.";
+      }
+    }
+  </script>
+</body>
+</html>
